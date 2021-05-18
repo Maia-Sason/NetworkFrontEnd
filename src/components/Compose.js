@@ -19,7 +19,7 @@ function Compose({ create, createdPost }) {
         create(content)
         console.log(composeForm)
         createdPost()
-        content = ''
+        setComposeForm({content: ""});
     }
 
     return (

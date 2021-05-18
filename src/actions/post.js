@@ -36,3 +36,34 @@ export const create = (content) => async dispatch => {
         })
     }
 }
+
+export const update = (content, postID) => async dispatch => {
+    const config = {
+        credentials: 'include',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'X-CSRFToken': Cookies.get('csrftoken')
+        }
+    };
+
+    const body = JSON.stringify({ content });
+    const id = postID;
+
+    try {
+        const res = await axios.put(`${process.env.REACT_APP_API_URL}/network/create/${id}`, body, config)
+    } catch(err) {}
+
+}
+
+export const like = (content) => async dispatch => {
+    const config = {
+        credentials: 'include',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'X-CSRFToken': Cookies.get('csrftoken')
+        }
+    };
+
+}

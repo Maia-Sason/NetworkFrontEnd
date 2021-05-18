@@ -1,8 +1,46 @@
+import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import { connect } from 'react-redux';
+import { update } from '../actions/post';
 
-function Post({body, username, likes, timestamp, sessionUser}) {
+function Post({body, id, username, likes, timestamp, sessionUser, update, isAuthenticated}) {
+    // Editing post.
+    const [originalLike, setLike] = useState(false);
+    const [editing, setEditing] = useState(false);
+    const [bodyPost, setBodyPost] = useState(body);
+    const [editForm, setEditForm] = useState({content: body})
+
+    const {content} = editForm
+
+    const onChange = e => setEditForm({...editForm, [e.target.name]: e.target.value })
+
+    const onSubmit = e => {
+        console.log(editForm)
+        e.preventDefault()
+        update(content, id)
+        setBodyPost(content);
+        setEditing(!editing);
+    }
+
+    const handleClick = (e) => {
+        setEditing(!editing);
+        console.log(id)
+    }
+
+    // liking post
+    const likeClick = (e) => {
+        setLike(!originalLike);
+    }
+
+    const EditPost = (
+        <>
+        <form onSubmit={e => onSubmit(e)}>
+            <input name="content" className="registration_input" value={content} onChange={e => onChange(e)}></input>
+        </form>
+        </>
+    )
+
     return (
         <div className="post_container">
             <div className="profile_section">
@@ -17,14 +55,16 @@ function Post({body, username, likes, timestamp, sessionUser}) {
             </div>
             <div className="break"></div>
             <div className="body_section">
-                <span>{body}</span>
+                {editing ? EditPost : <span>{bodyPost}</span>}
                 <div className="like_container">
-                    <span><FontAwesomeIcon icon={faHeart} color={"grey"}>
-                        </FontAwesomeIcon>
+                    <span> {isAuthenticated ? (<FontAwesomeIcon className={`like_auth ${originalLike && 'like_auth_active'}`} onClick={(e) => likeClick()} icon={faHeart} color={"grey"}>
+                        </FontAwesomeIcon>) : (<FontAwesomeIcon icon={faHeart} color={"grey"}>
+                        </FontAwesomeIcon>)
+                    }
                     </span>
-                    <span>{likes}</span>
+                    <span>{originalLike ? likes + 1 : likes}</span>
                     {sessionUser.username === username &&
-                    <button value={"edit"}>edit</button>}
+                    <button onClick={(e) => handleClick()} value={"edit"}> {editing ? 'X' : 'Edit' }</button>}
                 </div>
             </div>
         </div>
@@ -32,7 +72,8 @@ function Post({body, username, likes, timestamp, sessionUser}) {
 }
 
 const mapStateToProps = state => ({
-    sessionUser: state.user
+    sessionUser: state.user,
+    isAuthenticated: state.auth.isAuthenticated
 })
 
-export default connect(mapStateToProps,)(Post);
+export default connect(mapStateToProps, {update})(Post);

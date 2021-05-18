@@ -1,13 +1,11 @@
-import react, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import Post from "./Post.js"
 import Compose from "./Compose.js"
 import axios from 'axios'
 import Load from './Load.js'
 import { connect } from 'react-redux'
 
-function PostBox({isAuthenticated}) {
-    const [loaded, setLoaded] = useState(false);
-    const [posts, setPosts] = useState([])
+function PostBox({isAuthenticated, loaded, posts, getPosts}) {
     const [created, setCreated] = useState(false)
     
     const createdPost = () => {
@@ -16,33 +14,12 @@ function PostBox({isAuthenticated}) {
         setCreated(false)
 
     }
-    
-    const fetchData = async () => {
-        let res
-        try {
-            res = await axios.get(`${process.env.REACT_APP_API_URL}/network/posts`)
-        } catch(err) {}
-
-        return res;
-    };
-
-    const getPosts = async () => {
-        const tasksFromServer = await fetchData()
-        setPosts(tasksFromServer.data.iterate[1]);
-    }
-
-    useEffect(() => {
-        getPosts();
-        setLoaded(true);
-    }, []);
 
     const postList = posts.map((post, index) => {
         return (
-            <Post body={post.content} username={post.creator} likes={post.likes} timestamp={post.timestamp}></Post>
+            <Post body={post.content} username={post.creator} likes={post.likes} timestamp={post.timestamp} id={post.id}></Post>
         )
     })
-
-    console.log(posts)
 
     const authComp = (
         <>

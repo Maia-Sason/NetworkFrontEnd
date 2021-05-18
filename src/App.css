@@ -208,6 +208,20 @@ ul {
   padding: 2px;
 }
 
+.like_auth {
+  transition: .3s ease;
+}
+
+.like_auth:hover {
+  color: red;
+  transform: scale(1.2);
+}
+
+
+.like_auth_active {
+  color: red;
+}
+
 /* NavBar */
 .navbar_container {
   background: white;
