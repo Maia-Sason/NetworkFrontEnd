@@ -6,7 +6,8 @@ import {
 const initState = {
     isAuthenticated: null,
     username: '',
-    email: ''
+    email: '',
+    likes: ''
 }
 
 export default function(state = initState, action) {
@@ -18,7 +19,9 @@ export default function(state = initState, action) {
                 ...state,
                 id: payload.id,
                 username: payload.username,
-                email: payload.email
+                email: payload.email,
+                likes: payload.likes
+
 
             }
         case USER_FAIL: 
@@ -26,7 +29,8 @@ export default function(state = initState, action) {
                 ...state,
                 id: '',
                 username: '',
-                email: ''
+                email: '',
+                likes: ''
             }
         default:
             return state

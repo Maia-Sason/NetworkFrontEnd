@@ -1,15 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import { connect } from 'react-redux';
 import { update } from '../actions/post';
+import { like } from '../actions/post';
 
-function Post({body, id, username, likes, timestamp, sessionUser, update, isAuthenticated}) {
+function Post({body, id, username, likes, timestamp, sessionUser, sessionLikes, update, isAuthenticated, like}) {
     // Editing post.
     const [originalLike, setLike] = useState(false);
     const [editing, setEditing] = useState(false);
     const [bodyPost, setBodyPost] = useState(body);
     const [editForm, setEditForm] = useState({content: body})
+
+    useEffect(() => {
+        console.log(sessionUser)
+        console.log('this is post id: '+ id + ' ' + body)
+        if (sessionUser.likes !== '') {
+            setLike(sessionUser.likes.includes(id))
+        }
+    }, []);
 
     const {content} = editForm
 
@@ -25,12 +34,12 @@ function Post({body, id, username, likes, timestamp, sessionUser, update, isAuth
 
     const handleClick = (e) => {
         setEditing(!editing);
-        console.log(id)
     }
 
     // liking post
     const likeClick = (e) => {
         setLike(!originalLike);
+        like(id);
     }
 
     const EditPost = (
@@ -73,7 +82,8 @@ function Post({body, id, username, likes, timestamp, sessionUser, update, isAuth
 
 const mapStateToProps = state => ({
     sessionUser: state.user,
+    sessionLikes: state.user.liking,
     isAuthenticated: state.auth.isAuthenticated
 })
 
-export default connect(mapStateToProps, {update})(Post);
+export default connect(mapStateToProps, {update, like})(Post);

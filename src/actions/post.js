@@ -56,7 +56,7 @@ export const update = (content, postID) => async dispatch => {
 
 }
 
-export const like = (content) => async dispatch => {
+export const like = (id) => async dispatch => {
     const config = {
         credentials: 'include',
         headers: {
@@ -65,5 +65,13 @@ export const like = (content) => async dispatch => {
             'X-CSRFToken': Cookies.get('csrftoken')
         }
     };
+
+    const body = JSON.stringify({
+        'withCredentials': true
+    });
+
+    try {
+        const res = await axios.put(`${process.env.REACT_APP_API_URL}/network/like/${id}`, body, config)
+    } catch(err) {}
 
 }
