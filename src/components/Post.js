@@ -8,6 +8,7 @@ import { like } from '../actions/post';
 function Post({body, id, username, likes, timestamp, sessionUser, sessionLikes, update, isAuthenticated, like}) {
     // Editing post.
     const [originalLike, setLike] = useState(false);
+    const [alreadyLike, setAlreadyLike] = useState(false);
     const [editing, setEditing] = useState(false);
     const [bodyPost, setBodyPost] = useState(body);
     const [editForm, setEditForm] = useState({content: body})
@@ -16,7 +17,7 @@ function Post({body, id, username, likes, timestamp, sessionUser, sessionLikes, 
         console.log(sessionUser)
         console.log('this is post id: '+ id + ' ' + body)
         if (sessionUser.likes !== '') {
-            setLike(sessionUser.likes.includes(id))
+            setAlreadyLike(sessionUser.likes.includes(id))
         }
     }, []);
 
@@ -50,6 +51,34 @@ function Post({body, id, username, likes, timestamp, sessionUser, sessionLikes, 
         </>
     )
 
+    const AuthLiked = (
+        <>
+        <span> 
+            <FontAwesomeIcon className={`like_auth ${originalLike ? '' : 'like_auth_active' }`} onClick={(e) => likeClick()} icon={faHeart} color={"grey"}>
+            </FontAwesomeIcon>
+        </span>
+        <span>{originalLike ? likes - 1 : likes}</span>
+        </>
+    )
+
+    const unAuth = (
+        <>
+        <span> 
+            <FontAwesomeIcon icon={faHeart} color={"grey"}/>
+        </span>
+        <span>{likes}</span>
+        </>
+    )
+
+    const Auth = (
+        <>
+        <span> 
+            <FontAwesomeIcon className={`like_auth ${originalLike && 'like_auth_active'}`} onClick={(e) => likeClick()} icon={faHeart} color={"grey"}/>
+        </span>
+        <span>{originalLike ? likes + 1 : likes}</span>
+        </>
+    )
+
     return (
         <div className="post_container">
             <div className="profile_section">
@@ -66,12 +95,7 @@ function Post({body, id, username, likes, timestamp, sessionUser, sessionLikes, 
             <div className="body_section">
                 {editing ? EditPost : <span>{bodyPost}</span>}
                 <div className="like_container">
-                    <span> {isAuthenticated ? (<FontAwesomeIcon className={`like_auth ${originalLike && 'like_auth_active'}`} onClick={(e) => likeClick()} icon={faHeart} color={"grey"}>
-                        </FontAwesomeIcon>) : (<FontAwesomeIcon icon={faHeart} color={"grey"}>
-                        </FontAwesomeIcon>)
-                    }
-                    </span>
-                    <span>{originalLike ? likes + 1 : likes}</span>
+                    {isAuthenticated ? alreadyLike ? AuthLiked : Auth : unAuth}
                     {sessionUser.username === username &&
                     <button onClick={(e) => handleClick()} value={"edit"}> {editing ? 'X' : 'Edit' }</button>}
                 </div>

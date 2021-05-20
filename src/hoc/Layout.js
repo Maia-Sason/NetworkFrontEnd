@@ -3,19 +3,24 @@ import Navbar from "../components/NavBar";
 import {connect} from 'react-redux';
 import { checkAuthenticated} from '../actions/auth';
 import NotificationBox from '../components/NotificationBox';
-import { get_user } from '../actions/user'
+import Load from '../components/Load.js';
+import { get_user } from '../actions/user';
+
 
 const Layout = ({ children, get_user, checkAuthenticated }) => {
+    const [loadedUser, setLoadedUser] = useState(false)
+    
     useEffect(() => {
         checkAuthenticated();
         get_user();
+        setLoadedUser(true)
     }, []);
     
     return (
         <>
             <Navbar/>
             <header className="App-header">
-            {children}
+            {loadedUser ? children : <Load/>}
             </header>
         </>
     )
