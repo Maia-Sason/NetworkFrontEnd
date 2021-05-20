@@ -1,6 +1,9 @@
 import {
     USER_SUCCESS,
-    USER_FAIL
+    USER_FAIL,
+    LIKE_SUCCESS,
+    UNLIKE_SUCCESS,
+    LIKE_FAIL
 } from '../actions/types'
 
 const initState = {
@@ -32,6 +35,18 @@ export default function(state = initState, action) {
                 email: '',
                 likes: ''
             }
+        case LIKE_SUCCESS:
+            return {
+                ...state,
+                likes: state.likes.concat(payload)
+            }
+        case UNLIKE_SUCCESS:
+            return {
+                ...state,
+                likes: state.likes.filter((item) => item !== payload)
+            }
+        case LIKE_FAIL:
+            return state
         default:
             return state
     }

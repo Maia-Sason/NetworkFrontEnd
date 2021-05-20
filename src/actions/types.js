@@ -15,3 +15,8 @@ export const USER_FAIL = 'USER_FAIL'
 // posts
 export const POST_SUCCESS = 'POST_SUCCESS'
 export const POST_FAIL = 'POST_FAIL'
+export const UPDATE_SUCCESS = 'UPDATE_SUCCESS'
+export const UPDATE_FAIL = 'UPDATE_FAIL'
+export const UNLIKE_SUCCESS = 'UNLIKE_SUCCESS'
+export const LIKE_SUCCESS = 'LIKE_SUCCESS'
+export const LIKE_FAIL = 'LIKE_FAIL'

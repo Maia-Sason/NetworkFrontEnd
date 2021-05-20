@@ -6,14 +6,6 @@ import Load from './Load.js'
 import { connect } from 'react-redux'
 
 function PostBox({isAuthenticated, loaded, posts, getPosts}) {
-    const [created, setCreated] = useState(false)
-    
-    const createdPost = () => {
-        setCreated(true)
-        getPosts()
-        setCreated(false)
-
-    }
 
     const postList = posts.map((post, index) => {
         return (
@@ -23,7 +15,7 @@ function PostBox({isAuthenticated, loaded, posts, getPosts}) {
 
     const authComp = (
         <>
-            <Compose createdPost={createdPost}/>
+            <Compose/>
                 <div className="break_out"/>
         </>
     )

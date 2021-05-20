@@ -4,11 +4,10 @@ import { create } from '../actions/post';
 import { connect } from 'react-redux';
 import CSRFToken from '../components/CSRFToken';
 
-function Compose({ create, createdPost }) {
+function Compose({ create }) {
     const [composeForm, setComposeForm] = useState({
         content: ''
     })
-    const [created, setCreated] = useState(false)
 
     const {content} = composeForm
     
@@ -17,8 +16,6 @@ function Compose({ create, createdPost }) {
     const onSubmit = e => {
         e.preventDefault()
         create(content)
-        console.log(composeForm)
-        createdPost()
         setComposeForm({content: ""});
     }
 
