@@ -66,20 +66,33 @@ ul {
 /* Compose */
 .compose_container {
   background: white;
+  overflow: hidden;
   color: grey;
   border-top: solid 15px rgb(69, 193, 150);
-  padding: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   border-radius: 15px;
+  padding-left: 20px;
   box-shadow: 2px 2px 3px rgba(128, 128, 128, 0.406);
 }
 
 .compose_section {
   display: flex;
-  justify-content: space-around;
+  justify-content: start;
+}
+
+.profile {
+  width: 50px;
+  height: 50px;
 }
 
 .compose_section > * {
   margin: 5px;
+}
+
+.flex_compose {
+  flex-basis: 80%;
+  flex-shrink: 1; 
 }
 
 .compose_in {
@@ -87,8 +100,10 @@ ul {
   border-style: none;
   background:#dcdde1;
   padding: 10px;
+  resize: none;
+  font: inherit;
+  width: fill;
   font-size: 16px;
-  min-width: 70%;
   text-align: left;
   color: black;
   padding-top: 15px;
@@ -138,7 +153,7 @@ ul {
 
 .postBox_container {
   margin: 20px;
-  min-width: 500px;
+  min-width: 100px;
   max-width: 600px;
 
 }

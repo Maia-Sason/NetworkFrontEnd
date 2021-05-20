@@ -13,15 +13,15 @@ function PostBox({isAuthenticated, loaded, posts, getPosts}) {
         )
     })
 
-    const recentlyPosted = (post) => {
-        postList.unshift(recentPost)
-    }
+    // const recentlyPosted = (post) => {
+    //     postList.unshift(recentPost)
+    // }
 
 
 
     const authComp = (
         <>
-            <Compose recentlyPosted={recentlyPosted}/>
+            <Compose/>
                 <div className="break_out"/>
         </>
     )
@@ -29,8 +29,9 @@ function PostBox({isAuthenticated, loaded, posts, getPosts}) {
 
     return (
     <div className="postBox_container">
-        {isAuthenticated && authComp} 
         
+        {isAuthenticated && authComp} 
+            <Compose/>
             {loaded ? postList : <Load/>}
     </div>
     )

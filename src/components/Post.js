@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart } from '@fortawesome/free-solid-svg-icons'
+import React, { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { connect } from 'react-redux';
 import { update } from '../actions/post';
 import { like } from '../actions/post';
@@ -14,9 +14,7 @@ function Post({body, id, username, likes, timestamp, sessionUser, sessionLikes, 
     const [editForm, setEditForm] = useState({content: body})
 
     useEffect(() => {
-        console.log(sessionUser)
-        console.log('this is post id: '+ id + ' ' + body)
-        if (sessionUser.likes !== '') {
+        if (sessionUser.likes !== undefined) {
             setAlreadyLike(sessionUser.likes.includes(id))
         }
     }, []);
