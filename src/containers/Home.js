@@ -1,9 +1,11 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
 import PostBox from '../components/PostBox'
+import { connect } from 'react-redux'
+import Compose from "../components/Compose.js"
 
 
-const Home = () => {
+const Home = (isAuthenticated) => {
     const [loaded, setLoaded] = useState(false);
     const [posts, setPosts] = useState([])
    
@@ -26,11 +28,37 @@ const Home = () => {
         setLoaded(true);
     }, []);
 
+    useEffect(() => {
+        setLoaded(true);
+    }, [posts])
+
+    const updatePost = async () => {
+        setLoaded(false);
+        getPosts();
+        
+    }
+
+    const authComp = (
+        <>
+            <Compose updatePost={updatePost}/>
+                <div className="break_out"/>
+        </>
+    )
+
     return ( 
    <div>
-        <PostBox getPosts={getPosts} posts={posts} loaded={loaded} />
+       <div className="compose_home_container">
+        {isAuthenticated && authComp}
+        </div>
+        <div className="postbox_home_container">
+        <PostBox getPosts={getPosts} updatePost={updatePost} setPosts={setPosts} posts={posts} loaded={loaded} />
+        </div>
     </div>
     )
 }
 
-export default Home
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated
+})
+
+export default connect(mapStateToProps, )(Home)

@@ -5,7 +5,7 @@ import { create } from '../actions/post';
 import { connect } from 'react-redux';
 import CSRFToken from '../components/CSRFToken';
 
-function Compose({ create, setNewPost, reloadPosts }) {
+function Compose({ create, updatePost }) {
     const [composeForm, setComposeForm] = useState({
         content: ''
     })
@@ -27,10 +27,9 @@ function Compose({ create, setNewPost, reloadPosts }) {
         // e.preventDefault()
         if (content.length > 0) {
             create(content)
-            // recentlyPosted(createdPost)
             setComposeForm({content: ""});
             // setNewPost(true);
-            reloadPosts();
+            updatePost();
             
         }
     }
