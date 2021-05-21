@@ -7,8 +7,6 @@ import {
     LOGOUT_SUCCESS,
     LOGOUT_FAIL,
     AUTHENTICATE_FAIL,
-    POST_FAIL,
-    POST_SUCCESS
 } from '../actions/types'
 
 const initState = {
@@ -40,8 +38,6 @@ export default function(state = initState, action) {
                 ...state,
                 isAuthenticated: false
             }
-        case POST_SUCCESS:
-        case POST_FAIL:
         case REGISTER_FAIL:
         case LOGIN_FAIL:
         case LOGOUT_FAIL:

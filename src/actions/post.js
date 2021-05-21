@@ -32,7 +32,8 @@ export const create = (content) => async dispatch => {
             });
         } else {
             dispatch({
-                type: POST_SUCCESS
+                type: POST_SUCCESS,
+                payload: res.data
             })
         }
     } catch(err) {

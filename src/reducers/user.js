@@ -3,14 +3,17 @@ import {
     USER_FAIL,
     LIKE_SUCCESS,
     UNLIKE_SUCCESS,
-    LIKE_FAIL
+    LIKE_FAIL,
+    POST_SUCCESS,
+    POST_FAIL
 } from '../actions/types'
 
 const initState = {
     isAuthenticated: null,
     username: '',
     email: '',
-    likes: ''
+    likes: '',
+    post: ''
 }
 
 export default function(state = initState, action) {
@@ -45,6 +48,12 @@ export default function(state = initState, action) {
                 ...state,
                 likes: state.likes.filter((item) => item !== payload)
             }
+        case POST_SUCCESS:
+            return {
+                ...state,
+                post: payload
+            }
+        case POST_FAIL:
         case LIKE_FAIL:
             return state
         default:
