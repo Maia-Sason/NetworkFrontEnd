@@ -1,4 +1,5 @@
 import logo from './logo.svg';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 // Get redux in app
@@ -17,6 +18,7 @@ import Layout from "./hoc/Layout.js"
 import Home from "./containers/Home.js"
 import Login from "./containers/Login.js"
 import Register from "./containers/Register.js"
+import Profile from "./containers/Profile.js"
 import Notification from './components/Notification'
 import NotificationBox from './components/NotificationBox'
 
@@ -38,7 +40,7 @@ function App() {
             <Route exact path='/' component={Home}/>
             <Route exact path='/register' component={Register}/>
             <Route exact path='/login' component={Login}/>
-            
+            <Route exact path='/profile/:id' component={Profile}/>
           </Layout>
           
         </Router>

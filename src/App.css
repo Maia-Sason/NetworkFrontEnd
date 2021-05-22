@@ -3,6 +3,18 @@
   border-radius: 8px;
 }
 
+* {
+  -webkit-box-sizing: content-box;
+     -moz-box-sizing: content-box;
+          box-sizing: content-box;
+}
+*:before,
+*:after {
+  -webkit-box-sizing: content-box;
+     -moz-box-sizing: content-box;
+          box-sizing: content-box;
+}
+
 ul {
   list-style: none;
   margin: 0;
@@ -178,6 +190,11 @@ ul {
   margin: 20px;
 }
 
+.pagination_location {
+  display: flex;
+  justify-content: center;
+}
+
 /* Post */
 .post_container {
   background: white;
@@ -226,16 +243,16 @@ ul {
   font-size: 15px;
 }
 
-.edit_button {
+.edit_button_custom {
   border-style: none;
   background: none;
-  
+  font-size: 15px !important;
   color: inherit;
   cursor: pointer;
   transition: .3s ease;
 }
 
-.edit_container {
+.edit_container_custom {
   height: 10px;
   width: 20px;
   padding-right: 10px;

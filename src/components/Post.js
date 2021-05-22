@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import {Link} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import TextareaAutosize from 'react-textarea-autosize';
@@ -97,12 +98,12 @@ function Post({body, id, username, likes, timestamp, sessionUser, sessionLikes, 
                 <div className="header_post">
                     
                     <div className="post_name_date">
-                        <div className="username_post">{username}</div>
+                        <Link exact to={`/profile/${username}`} className="username_post">{username}</Link>
                         <div className="date_post">{timestamp}</div>
                     </div>
-                    <div className="edit_container">
+                    <div className="edit_container_custom">
                         {sessionUser.username === username &&
-                        <button className="edit_button" onClick={(e) => handleClick()} value={"edit"}> {editing ? 'X' : 'Edit' }</button>}
+                        <button className="edit_button_custom" onClick={(e) => handleClick()} value={"edit"}> {editing ? 'X' : 'Edit' }</button>}
                     </div>
                 </div>
             </div>

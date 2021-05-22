@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import CSRFToken from '../components/CSRFToken';
 
 function Compose({ create, updatePost }) {
+    
     const [composeForm, setComposeForm] = useState({
         content: ''
     })
