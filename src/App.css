@@ -35,8 +35,12 @@ ul {
 }
 
 .load {
-  position: absolute;
+  position: fixed;
   display: flex;
+  top: 40%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
   flex-direction: row;
   justify-content: center;
 }
@@ -67,16 +71,16 @@ ul {
 /* Compose */
 
 .compose_container {
+  margin-top: 60px;
   transition: 1s ease;
   background: white;
   overflow: hidden;
   color: grey;
   border-top: solid 15px rgb(69, 193, 150);
-  padding-top: 10px;
-  padding-bottom: 10px;
   border-radius: 15px;
   padding-left: 20px;
   box-shadow: 2px 2px 3px rgba(128, 128, 128, 0.406);
+  padding-top: 10px;
   padding-bottom: 10px;
 }
 

@@ -3,9 +3,10 @@ import React, { useState, useEffect } from 'react'
 import PostBox from '../components/PostBox'
 import { connect } from 'react-redux'
 import Compose from "../components/Compose.js"
+import Load from '../components/Load.js'
 
 
-const Home = (isAuthenticated) => {
+const Home = ({isAuthenticated}) => {
     const [loaded, setLoaded] = useState(false);
     const [posts, setPosts] = useState([])
    
@@ -35,7 +36,6 @@ const Home = (isAuthenticated) => {
     const updatePost = async () => {
         setLoaded(false);
         getPosts();
-        
     }
 
     const authComp = (
@@ -48,10 +48,10 @@ const Home = (isAuthenticated) => {
     return ( 
    <div>
        <div className="compose_home_container">
-        {isAuthenticated && authComp}
+       {(isAuthenticated) && authComp}
         </div>
         <div className="postbox_home_container">
-        <PostBox getPosts={getPosts} updatePost={updatePost} setPosts={setPosts} posts={posts} loaded={loaded} />
+        {loaded ? <PostBox getPosts={getPosts} updatePost={updatePost} setPosts={setPosts} posts={posts} loaded={loaded} /> : <Load/> }
         </div>
     </div>
     )
@@ -61,4 +61,4 @@ const mapStateToProps = state => ({
     isAuthenticated: state.auth.isAuthenticated
 })
 
-export default connect(mapStateToProps, )(Home)
+export default connect(mapStateToProps, null)(Home)
