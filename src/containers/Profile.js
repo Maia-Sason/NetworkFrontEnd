@@ -15,9 +15,6 @@ const Profile = () => {
     const [loadedPosts, setLoadedPosts] = useState(false);
     const [loadedUser, setLoadedUser] = useState(false);
     const [posts, setPosts] = useState([]);
-    // const [username, setUserName] = useState('');
-    // const [followingCount, setFollowingCount] = useState(0);
-    // const [followerCount, setFollowerCount] = useState(0);
     const [page, setPage] = useState(1);
     const [maxPage, setMaxPage] = useState(1);
     const [nextButton, setNextButton] = useState(false);

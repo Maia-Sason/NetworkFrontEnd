@@ -36,11 +36,10 @@ function PostBox({isAuthenticated, user, updatePost, loaded, setPosts, posts, ne
     return (
     <div>
     <div className="postBox_container">
-            {loaded ? postsToDisplay : <Load/>}
-            {paginationBasic}
-            
+        {loaded ? postsToDisplay : <Load/>}
+        {paginationBasic}
     </div>
-        
+    
     </div>
     )
 
