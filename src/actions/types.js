@@ -20,3 +20,8 @@ export const UPDATE_FAIL = 'UPDATE_FAIL'
 export const UNLIKE_SUCCESS = 'UNLIKE_SUCCESS'
 export const LIKE_SUCCESS = 'LIKE_SUCCESS'
 export const LIKE_FAIL = 'LIKE_FAIL'
+
+// follow users
+export const FOLLOW_SUCCESS = 'FOLLOW_SUCCESS'
+export const UNFOLLOW_SUCCESS = 'UNFOLLOW_SUCCESS'
+export const FOLLOW_FAIL = 'FOLLOW_FAIL'

@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import { checkAuthenticated} from '../actions/auth';
 import NotificationBox from '../components/NotificationBox';
 import Load from '../components/Load.js';
+import ProfileHeader from '../components/ProfileHeader.js';
 import { get_user } from '../actions/user';
 
 

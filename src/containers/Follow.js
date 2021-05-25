@@ -1,4 +1,7 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import axios from 'axios';
+import PostBox from '../components/PostBox';
+import Load from '../components/Load.js'
 
 const Follow = () => {
     const [loaded, setLoaded] = useState(false);
@@ -19,6 +22,7 @@ const Follow = () => {
 
     const getPosts = async (number) => {
         const tasksFromServer = await fetchData(number)
+        console.log(tasksFromServer);
         setPosts(tasksFromServer.data.posts);
         setMaxPage(tasksFromServer.data.max);
         setPage(tasksFromServer.data.page);
@@ -48,7 +52,7 @@ const Follow = () => {
     return ( 
         <div>
            <div className="postbox_home_container">
-                {loaded ? <PostBox maxPage={maxPage} hasNext={nextButton} hasPrev={previousButton} page={page} setPageLoad={setPageLoad} getPosts={getPosts} updatePost={updatePost} setPosts={setPosts} posts={posts} loaded={loaded} /> : <Load/> }
+                {loaded ? <PostBox maxPage={maxPage} hasNext={nextButton} hasPrev={previousButton} page={page} setPageLoad={setPageLoad} getPosts={getPosts} setPosts={setPosts} posts={posts} loaded={loaded} /> : <Load/> }
             </div>
         </div>
     )

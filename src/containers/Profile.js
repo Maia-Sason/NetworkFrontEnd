@@ -3,9 +3,14 @@ import {useParams} from "react-router-dom";
 import axios from 'axios';
 import PostBox from '../components/PostBox';
 import Load from '../components/Load';
+import ProfileHeader from '../components/ProfileHeader';
+import { connect } from 'react-redux';
+import { follow } from '../actions/follow';
+import { set } from 'js-cookie';
 
 
-const Profile = () => {
+
+const Profile = ({sessionUser, isAuthenticated, follow}) => {
     const [userProfile, setUserProfile] = useState({
         username: '',
         followers: '',
@@ -19,6 +24,8 @@ const Profile = () => {
     const [maxPage, setMaxPage] = useState(1);
     const [nextButton, setNextButton] = useState(false);
     const [previousButton, setPreviousButton] = useState(false);
+
+    const [alreadyFollowing, setAlreadyFollowing] = useState(false);
 
     const id = useParams();
    
@@ -53,14 +60,15 @@ const Profile = () => {
     }
 
     useEffect(() => {
-        console.log(userProfile);
+        if (sessionUser.follows !== undefined) {
+            setAlreadyFollowing(sessionUser.follows.includes(userProfile.id));
+        }
         setLoadedUser(true);
     }, [userProfile]);
 
-    useEffect(() => {
-        console.log(posts);
-        setLoadedPosts(true);
 
+    useEffect(() => {
+        setLoadedPosts(true);
     }, [posts])
 
     useEffect(() => {
@@ -78,16 +86,28 @@ const Profile = () => {
         getPosts(number);
     }
 
+    const followAction = () => {
+        follow(userProfile.id);
+    }
+
     return ( 
         <div>
             <div>
-                {loadedUser ? `${userProfile.username}, followers: ${userProfile.followers}, following: ${userProfile.following}` : <Load/>}
+                
+                {loadedUser ? <ProfileHeader followAction={followAction} follow={follow} sessionUser={sessionUser} isAuthenticated={isAuthenticated} username={userProfile.username} alreadyFollowing={alreadyFollowing} followers={userProfile.followers} following={userProfile.following} id={userProfile.id}/> : <Load/>}
             </div>
+            <div className="center">
             <div className="postbox_home_container">
             {loadedPosts ? <PostBox maxPage={maxPage} hasNext={nextButton} hasPrev={previousButton} page={page} setPageLoad={setPageLoad} getPosts={getPosts} updatePost={updatePost} setPosts={setPosts} posts={posts} loaded={loadedPosts} /> : <Load/>}
+            </div>
             </div>
         </div>
     )
 }
 
-export default Profile
+const mapStateToProps = state => ({
+    sessionUser: state.user,
+    isAuthenticated: state.auth.isAuthenticated
+})
+
+export default connect(mapStateToProps, {follow})(Profile);

@@ -5,7 +5,10 @@ import {
     UNLIKE_SUCCESS,
     LIKE_FAIL,
     POST_SUCCESS,
-    POST_FAIL
+    POST_FAIL,
+    FOLLOW_SUCCESS,
+    UNFOLLOW_SUCCESS,
+    FOLLOW_FAIL
 } from '../actions/types'
 
 const initState = {
@@ -13,7 +16,8 @@ const initState = {
     username: '',
     email: '',
     likes: '',
-    post: ''
+    post: '',
+    follows: ''
 }
 
 export default function(state = initState, action) {
@@ -26,8 +30,8 @@ export default function(state = initState, action) {
                 id: payload.id,
                 username: payload.username,
                 email: payload.email,
-                likes: payload.likes
-
+                likes: payload.likes,
+                follows: payload.follows
 
             }
         case USER_FAIL: 
@@ -36,7 +40,8 @@ export default function(state = initState, action) {
                 id: '',
                 username: '',
                 email: '',
-                likes: ''
+                likes: '',
+                follows: ''
             }
         case LIKE_SUCCESS:
             return {
@@ -53,6 +58,17 @@ export default function(state = initState, action) {
                 ...state,
                 post: payload
             }
+        case FOLLOW_SUCCESS:
+            return {
+                ...state,
+                follows: state.follows.concat(payload)
+            }
+        case UNFOLLOW_SUCCESS:
+            return {
+                ...state,
+                follows: state.follows.filter((item) => item !== payload)
+            }
+        case FOLLOW_FAIL:
         case POST_FAIL:
         case LIKE_FAIL:
             return state

@@ -19,6 +19,8 @@ import Home from "./containers/Home.js"
 import Login from "./containers/Login.js"
 import Register from "./containers/Register.js"
 import Profile from "./containers/Profile.js"
+import Follow from "./containers/Follow.js"
+
 import Notification from './components/Notification'
 import NotificationBox from './components/NotificationBox'
 
@@ -41,6 +43,7 @@ function App() {
             <Route exact path='/register' component={Register}/>
             <Route exact path='/login' component={Login}/>
             <Route exact path='/profile/:id' component={Profile}/>
+            <Route exact path='/follow' component={Follow}/>
           </Layout>
           
         </Router>

@@ -70,21 +70,21 @@ function Post({body, id, username, likes, timestamp, sessionUser, sessionLikes, 
         </>
     )
 
-    const unAuth = (
-        <>
-        <span> 
-            <FontAwesomeIcon icon={faHeart} color={"grey"}/>
-        </span>
-        <span className="likes_space">{likes}</span>
-        </>
-    )
-
     const Auth = (
         <>
         <span> 
             <FontAwesomeIcon className={`like_auth ${originalLike && 'like_auth_active'}`} onClick={(e) => likeClick()} icon={faHeart} color={"grey"}/>
         </span>
         <span className="likes_space">{originalLike ? likes + 1 : likes}</span>
+        </>
+    )
+
+    const unAuth = (
+        <>
+        <span> 
+            <FontAwesomeIcon icon={faHeart} color={"grey"}/>
+        </span>
+        <span className="likes_space">{likes}</span>
         </>
     )
 

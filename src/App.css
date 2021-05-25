@@ -267,7 +267,7 @@ ul {
   padding: 20px;
   display: flex;
   justify-content: space-between;
-  width: 20ch;
+  /* width: 20ch; */
 }
 
 .body_content {
@@ -516,6 +516,88 @@ ul {
   transform: translateY(-100%);
   transition: .3s ease-in-out;
 }
+
+/* Profile */
+.profile_container {
+  width: 100vh;
+  display: flex;
+  justify-content: space-between;
+  
+}
+
+.profile_header {
+  margin: 10px;
+  display: flex;
+  width: 50%;
+  overflow: hidden;
+
+}
+
+.profile_image_container {
+  border-radius: 15px;
+  width: 100px;
+  height: 100px;
+  padding: 10px;
+  transform: translate(5%, 25%);
+  transition: .3s ease;
+}
+
+.profile_image_container:hover {
+  background-color: rgb(127, 127, 136);
+}
+
+.profile_image {
+  width: 50px;
+  height: 50px;
+  transform: translate(50%, 50%);
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.profile_content {
+  margin: 10px;
+  padding: 20px;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  top: 30px;
+  line-height: 15px;
+}
+
+.profile_username {
+  font-weight: 600;
+  text-align: left;
+  
+}
+
+.follower_following { 
+  padding-top: 5px; 
+  font-size: 15px;
+  line-height: 0px;
+  max-width: 120px;
+  text-align: left;
+  text-overflow: ellipsis;
+
+}
+
+.follower_following > * {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: flex;
+  padding-left: 2px;
+  margin-top: 2px;
+}
+
+.follow_button_container {
+  margin: 20px;
+}
+
+
 
 /* Footer */
 .footer {
