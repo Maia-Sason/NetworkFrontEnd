@@ -1,4 +1,5 @@
 import {
+    LOGOUT_SUCCESS,
     USER_SUCCESS,
     USER_FAIL,
     LIKE_SUCCESS,
@@ -8,7 +9,11 @@ import {
     POST_FAIL,
     FOLLOW_SUCCESS,
     UNFOLLOW_SUCCESS,
-    FOLLOW_FAIL
+    FOLLOW_FAIL,
+    NOTIFICATION_READ_SUCCESS,
+    NOTIFICATION_READ_FAIL,
+    NOTIFICATION_REC_SUCCESS,
+    NOTIFICATION_REC_FAIL
 } from '../actions/types'
 
 const initState = {
@@ -17,13 +22,24 @@ const initState = {
     email: '',
     likes: '',
     post: '',
-    follows: ''
+    follows: '',
+    notifications: [{}]
 }
 
 export default function(state = initState, action) {
     const {type, payload} = action;
 
     switch(type) {
+        case LOGOUT_SUCCESS:
+            return {
+                isAuthenticated: null,
+                username: '',
+                email: '',
+                likes: '',
+                post: '',
+                follows: '',
+                notifications: [{}]
+            }
         case USER_SUCCESS:
             return {
                 ...state,
@@ -31,7 +47,9 @@ export default function(state = initState, action) {
                 username: payload.username,
                 email: payload.email,
                 likes: payload.likes,
-                follows: payload.follows
+                follows: payload.follows,
+                notifications: payload.notifications,
+                unread: payload.unread
 
             }
         case USER_FAIL: 
@@ -41,7 +59,9 @@ export default function(state = initState, action) {
                 username: '',
                 email: '',
                 likes: '',
-                follows: ''
+                follows: '',
+                notifications: [{}],
+                unread: ''
             }
         case LIKE_SUCCESS:
             return {
@@ -68,6 +88,20 @@ export default function(state = initState, action) {
                 ...state,
                 follows: state.follows.filter((item) => item !== payload)
             }
+        case NOTIFICATION_REC_SUCCESS:
+            return {
+                ...state,
+                notifications: [payload, ...state.notifications],
+                unread: state.unread + 1
+            }
+        case NOTIFICATION_READ_SUCCESS:
+            return {
+                ...state,
+                notifications: payload,
+                unread: 0
+            }
+        case NOTIFICATION_READ_FAIL:
+        case NOTIFICATION_REC_FAIL:
         case FOLLOW_FAIL:
         case POST_FAIL:
         case LIKE_FAIL:

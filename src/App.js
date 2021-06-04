@@ -8,10 +8,6 @@ import store from './store'
 
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 
-import Compose from "./components/Compose.js"
-import PostBox from "./components/PostBox.js"
-import Post from "./components/Post.js"
-import NavBar from "./components/NavBar.js"
 import Footer from "./components/Footer.js"
 
 import Layout from "./hoc/Layout.js"
@@ -21,18 +17,14 @@ import Register from "./containers/Register.js"
 import Profile from "./containers/Profile.js"
 import Follow from "./containers/Follow.js"
 
-import Notification from './components/Notification'
-import NotificationBox from './components/NotificationBox'
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCoffee, faSyncAlt } from '@fortawesome/free-solid-svg-icons'
 
-import React, { useState } from 'react';
-import { useEffect } from 'react';
-
-
+import React, { useState, useEffect } from 'react';
 
 function App() {
+  
+
   return (
     <Provider store={store}>
       <div className="App">

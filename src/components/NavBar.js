@@ -2,6 +2,7 @@
 import {NavLink, Link} from 'react-router-dom';
 import Notification from './Notification.js';
 import NotificationBox from './NotificationBox.js';
+import Socket from './Socket.js';
 import { connect } from 'react-redux';
 import { logout } from '../actions/auth';
 import { set } from 'js-cookie';
@@ -16,6 +17,8 @@ function NavBar({login, logout, follow, isAuthenticated }) {
             <Notification>
                 <NotificationBox/>
             </Notification>
+
+            <Socket/>
         </div>
     );
     
@@ -24,9 +27,6 @@ function NavBar({login, logout, follow, isAuthenticated }) {
             <Link exact to="/">Home</Link>
             <NavLink exact to="/login">Log In</NavLink>
             <NavLink exact to="/register">Register</NavLink>
-            <Notification>
-                <NotificationBox/>
-            </Notification>
         </div>
     );
     

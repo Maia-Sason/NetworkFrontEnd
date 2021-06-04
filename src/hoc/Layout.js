@@ -19,7 +19,7 @@ const Layout = ({ children, get_user, checkAuthenticated }) => {
     
     return (
         <>
-            <Navbar/>
+            {loadedUser ? <Navbar/> : <Load/>}
             <header className="App-header">
             {loadedUser ? children : <Load/>}
             </header>

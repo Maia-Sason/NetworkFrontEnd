@@ -35,6 +35,7 @@ function Compose({ create, updatePost }) {
         }
     }
 
+
     return (
         <div className="compose_container">
             <div className="compose_section">

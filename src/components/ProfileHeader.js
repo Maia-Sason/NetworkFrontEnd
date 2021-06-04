@@ -57,8 +57,8 @@ function ProfileHeader({sessionUser, alreadyFollowing, isAuthenticated, followAc
                     <p>{username}</p>
                 </div>
                 <div className="follower_following">
-                    <p>Following: <p> {following}</p></p>
                     {alreadyFollowing ? FollowingNums : Nums}
+                    <p>Following: <p> {following}</p></p>
                 </div>
             </div>
         </div>

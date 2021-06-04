@@ -1,16 +1,37 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import NotificationBox from './NotificationBox.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBell } from '@fortawesome/free-solid-svg-icons'
 import { CSSTransition } from 'react-transition-group';
+import { useSelector } from 'react-redux';
+import { connect } from 'react-redux';
+import { read } from '../actions/notification'
 
-function Notification({children}) {
+function Notification({children, user, read}) {
     const [open, setNotificationBox] = useState(false);
-    const nodeRef = React.useRef(null)
+    const [loaded, setLoaded] = useState(false)
+    const nodeRef = useRef(null)
 
+    const notifRef = useRef(null)
+
+    const unread = user.unread
+
+    const notificationsToSend = JSON.parse(JSON.stringify(user.notifications))
+
+    const notificationBoxFunction = () => {
+        if (notificationsToSend != '' && notificationsToSend != notifRef.current) {
+            notifRef.current = notificationsToSend
+        }
+        setLoaded(true)
+        if (open == true && unread > 0) {
+            read()
+        }
+        setNotificationBox(!open)
+    }
     return (
-        <div onClick={() => setNotificationBox(!open)}>
+        <div onClick={notificationBoxFunction}>
             <div className="bell">
+                {unread > 0 && <div className="bell_unread"></div>}
                 <FontAwesomeIcon icon={faBell}></FontAwesomeIcon>
             </div>
             <CSSTransition
@@ -21,11 +42,16 @@ function Notification({children}) {
                 unmountOnExit
             >
                 <div ref={nodeRef}>
-                    <NotificationBox/>
+                    <NotificationBox loaded={loaded} notifications={notifRef.current}/>
                 </div>
             </CSSTransition>
         </div>
     )
 }
 
-export default Notification
+const mapStateToProps = state => ({
+    notifications: state.user.notifications,
+    user: state.user
+})
+
+export default connect(mapStateToProps, {read})(Notification)
