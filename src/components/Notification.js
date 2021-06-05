@@ -12,16 +12,11 @@ function Notification({children, user, read}) {
     const [loaded, setLoaded] = useState(false)
     const nodeRef = useRef(null)
 
-    const notifRef = useRef(null)
-
     const unread = user.unread
 
     const notificationsToSend = JSON.parse(JSON.stringify(user.notifications))
 
     const notificationBoxFunction = () => {
-        if (notificationsToSend != '' && notificationsToSend != notifRef.current) {
-            notifRef.current = notificationsToSend
-        }
         setLoaded(true)
         if (open == true && unread > 0) {
             read()
@@ -42,7 +37,7 @@ function Notification({children, user, read}) {
                 unmountOnExit
             >
                 <div ref={nodeRef}>
-                    <NotificationBox loaded={loaded} notifications={notifRef.current}/>
+                    <NotificationBox loaded={loaded} notifications={notificationsToSend}/>
                 </div>
             </CSSTransition>
         </div>
